@@ -1,0 +1,47 @@
+SMOKE DENSITY CONTROLLER - FIRMWARE FLASHING (ESP32, 4 MB flash)
+=================================================================
+
+Firmware: smoke_density_modbus, 2026-11-26
+  - Modbus range-check fixes, SDR hold after test end
+  - Register 20 = test duration (0 = 240 s default, 2400 = 40 min transmission test)
+
+EASIEST: ONE FILE
+-----------------
+  smoke_density_modbus_full_0x0.bin   -> write at address 0x0
+
+SEPARATE FILES (same result)
+----------------------------
+  bootloader_0x1000.bin                   -> 0x1000
+  partitions_0x8000.bin                   -> 0x8000
+  boot_app0_0xe000.bin                    -> 0xE000
+  smoke_density_modbus_app_0x10000.bin    -> 0x10000
+
+Flash settings: SPI mode DIO, SPI speed 40 MHz, flash size 4 MB (32 Mbit).
+
+WINDOWS: ESPRESSIF FLASH DOWNLOAD TOOL
+--------------------------------------
+1. Download "Flash Download Tools" from Espressif:
+   https://www.espressif.com/en/support/download/other-tools
+2. Install the CP210x USB driver if the board's COM port does not appear:
+   https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers
+3. Run flash_download_tool.exe, choose ChipType ESP32, WorkMode Develop.
+4. Tick the first row, pick smoke_density_modbus_full_0x0.bin, address 0x0.
+5. SPI SPEED 40MHz, SPI MODE DIO, COM = the board's port, BAUD 460800.
+6. Put the board in boot mode: hold BOOT, press and release EN/RST, release BOOT.
+7. Click START and wait for FINISH.
+8. Press EN/RST once (BOOT released) to run the new firmware.
+
+COMMAND LINE (esptool, any OS)
+------------------------------
+  esptool.py --chip esp32 --port COM5 --baud 460800 --before no_reset --after hard_reset ^
+    write_flash --flash_mode dio --flash_freq 40m --flash_size 4MB 0x0 smoke_density_modbus_full_0x0.bin
+
+(Replace COM5 with the board's port. Board must be in boot mode first.)
+
+SHA-256 CHECKSUMS
+-----------------
+f94c5d786a7a8fab06ac5d10e33bf37711a6697636dc037559ea19cc410a17f0  boot_app0_0xe000.bin
+2e27030a8835b165326eff0f39c078cf971b9e2e7d179f76d7a9a13066270f6c  bootloader_0x1000.bin
+efba4421982bd177695a2e2091828fe3b6aa42076be3844a84f0fb08085cead4  partitions_0x8000.bin
+902e50e70e28e1065a45d53091a4786dba1ecc2180c709a20f9720854bc72ddf  smoke_density_modbus_app_0x10000.bin
+5ec860dc896f35f0ebc53775d1a0fed1307ded1e2fc6413cc440c779b64442cd  smoke_density_modbus_full_0x0.bin
