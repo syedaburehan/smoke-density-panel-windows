@@ -5,6 +5,7 @@ Contents
 --------
   Smoke Density Panel-Setup-1.0.0-win-x64.exe   Desktop app installer (Windows 10/11, 64-bit)
   firmware\                                     ESP32 controller firmware + HOW_TO_FLASH.txt
+  firmware\source\smoke_density_modbus\        Arduino source (.ino files)
   Modbus_Register_Datasheet.pdf                 Register map, data formats, test procedures
 
 1. Install the app

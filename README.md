@@ -14,6 +14,7 @@ Or just the [Windows installer (.exe)](https://github.com/syedaburehan/smoke-den
 | --- | --- |
 | `Smoke Density Panel-Setup-1.0.0-win-x64.exe` | Desktop app installer, Windows 10/11 64-bit (in the release / zip) |
 | [`firmware/`](firmware) | ESP32 firmware: one combined file (`smoke_density_modbus_full_0x0.bin`) or the four separate parts, plus [HOW_TO_FLASH.txt](firmware/HOW_TO_FLASH.txt) |
+| [`firmware/source/smoke_density_modbus/`](firmware/source/smoke_density_modbus) | Arduino source: [smoke_density_modbus.ino](firmware/source/smoke_density_modbus/smoke_density_modbus.ino), [modbus.ino](firmware/source/smoke_density_modbus/modbus.ino), [para.ino](firmware/source/smoke_density_modbus/para.ino) (ESP32 core 1.0.6, eModbus) |
 | [`Modbus_Register_Datasheet.pdf`](Modbus_Register_Datasheet.pdf) | Register map, data formats, test procedures |
 | [`README.txt`](README.txt) | Install, connect and use |
 
